@@ -61,6 +61,12 @@ ok = r["risk_level"] == "MEDIUM" and r["findings"][0]["id"] == "remote_exec_mess
 fail += not ok
 print(("PASS" if ok else "FAIL"), "message-capped", r["risk_level"])
 
+# path-qualified printf is still user output (held-out regression)
+r = aa.scan('post_install() {\n  /usr/bin/printf "    e.g. \'cp -r /var/lib/x ~/.local/share/\'\\n"\n}\n')
+ok = r["risk_level"] == "SAFE"
+fail += not ok
+print(("PASS" if ok else "FAIL"), "abs-printf-message", r["risk_level"])
+
 # the same npm install is context in build(), a finding in post_install()
 r1 = aa.scan("pkgname=x\nsource=()\nbuild() {\n  npm install\n}\n")
 r2 = aa.scan("post_install() {\n  npm install left-pad\n}\n")

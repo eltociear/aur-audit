@@ -302,7 +302,7 @@ HOST = re.compile(r"(?:https?|ftp)://(?:[^@/\s\"']*@)?([A-Za-z0-9.-]+)")
 
 FUNC = re.compile(r"^\s*(?:function\s+)?([A-Za-z_][\w.-]*)\s*\(\s*\)\s*(\{)?\s*(?:#.*)?$|^\s*function\s+([A-Za-z_][\w.-]*)\s*(\{)?\s*$")
 HEREDOC = re.compile(r"<<-?\s*\\?([\"']?)([A-Za-z_][A-Za-z0-9_]*)\1")
-MSG_CMD = re.compile(r"^\s*(?:echo|printf|msg2?|plain|warning|error|note|info|cat\s+<<)\b")
+MSG_CMD = re.compile(r"^\s*(?:(?:/usr)?/bin/)?(?:echo|printf|msg2?|plain|warning|error|note|info|cat\s+<<)\b")
 BUILD_FUNCS = re.compile(r"^(?:prepare|build|check|package(?:_[\w.+-]+)?|pkgver|_\w*|[\w.-]+)$")
 HOOK_FUNCS = {"pre_install", "post_install", "pre_upgrade", "post_upgrade"}
 REMOVE_FUNCS = {"pre_remove", "post_remove"}
